@@ -1,0 +1,33 @@
+{
+  "name": "@passly/passly-sdk",
+  "version": "0.1.2",
+   "type": "module",
+  "description": "Official SDK for Passly identity protocol - social identity verification for Web3",
+  "main": "src/passly-sdk.js",
+  "dependencies": {
+    "ethers": "^5.7.2"
+  },
+    "keywords": [
+    "web3",
+    "identity",
+    "verification",
+    "did",
+    "social",
+    "anti-sybil",
+    "blockchain",
+    "ethereum",
+    "skale",
+    "oauth",
+    "passport"
+  ],
+    "author": {
+    "name": "0xRetroDev",
+    "email": "hello@0xRetro.dev",
+    "url": "https://github.com/0xRetroDev"
+  },
+   "homepage": "https://passly.xyz",
+  "license": "MIT",
+    "publishConfig": {
+    "access": "public"
+  }
+}
