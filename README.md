@@ -31,7 +31,7 @@ console.log(passport);
 
 - ✅ **Identity Verification**: Check if users have verified social accounts
 - ✅ **Anti-Sybil Protection**: Verify unique identity across platforms
-- ✅ **Multiple Platforms**: Twitter, Discord, GitHub, Telegram support
+- ✅ **Multiple Platforms**: Twitter, Discord, GitHub, support
 - ✅ **Verification Strength**: Calculate identity confidence scores
 - ✅ **Account Age**: Track how long identities have been verified
 
