@@ -1,13 +1,13 @@
 {
   "name": "@passly/passly-sdk",
-  "version": "0.1.7",
-   "type": "module",
+  "version": "0.1.8",
+  "type": "module",
   "description": "Official SDK for Passly identity protocol - social identity verification for Web3",
   "main": "src/index.js",
   "dependencies": {
     "ethers": "^5.7.2"
   },
-    "keywords": [
+  "keywords": [
     "web3",
     "identity",
     "verification",
@@ -20,14 +20,14 @@
     "oauth",
     "passport"
   ],
-    "author": {
+  "author": {
     "name": "0xRetroDev",
     "email": "hello@0xRetro.dev",
     "url": "https://github.com/0xRetroDev"
   },
-   "homepage": "https://passly.xyz",
+  "homepage": "https://passly.xyz",
   "license": "MIT",
-    "publishConfig": {
+  "publishConfig": {
     "access": "public"
   }
 }

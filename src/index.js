@@ -1,4 +1,3 @@
-// index.js (or passly-sdk.js)
 import { ethers } from 'ethers';
 
 /**
@@ -52,7 +51,7 @@ class PasslySDK {
       passly: config.contractAddress || '0x8EEFC0840Bc24e269A2F77B787E9b3e212c4F316',
       platforms: config.platformsAddress || '0xd2FEEa5775c171D85648198AeB77377fD9AdFe98',
       archives: config.archivesAddress || '0xbC57EA3ff9BDE13087b907Dc02e86f08C57574E7',
-      rewards: config.rewardsAddress || '0xd2FEEa5775c171D85648198AeB77377fD9AdFe98',
+      rewards: config.rewardsAddress || '0xEc34ad267a9AACE045Ef4644047BCFeB0f53b0C0',
       leaderboard: config.leaderboardAddress || '0x7f9c4841346d0ef7970daF02aE3663f8AC5bE540'
     };
 
@@ -331,6 +330,31 @@ class PasslySDK {
       passportId: isVerified ? passportId.toNumber() : null
     };
   }
+
+  /**
+ * Get a user's identifier on a specific platform
+ * @param {string} address - The wallet address
+ * @param {string} platform - The platform name (e.g., "twitter")
+ * @returns {Promise<string|null>} - The platform identifier (username/handle) or null if not verified
+ */
+async getPlatformIdentifier(address, platform) {
+  this._ensureConnected();
+  
+  try {
+    const passportId = await this.getPassportId(address);
+    if (!passportId) return null;
+    
+    const [identifier, , , active] = await this.contracts.passly.getVerification(
+      passportId, 
+      platform.toLowerCase()
+    );
+    
+    // Only return identifier if verification is active
+    return active ? identifier : null;
+  } catch (error) {
+    return null;
+  }
+}
 
   // =============================================================================
   // REWARDS & POINTS FUNCTIONS
@@ -1020,6 +1044,44 @@ class PasslySDK {
 
     return verification.proofHash;
   }
+
+  /**
+ * Get all proof hashes for all verified platforms for a user
+ * @param {string} address - The wallet address
+ * @returns {Promise<{[platform: string]: string}|null>} - Object mapping platforms to proof hashes, or null if no passport
+ */
+async getAllProofHashes(address) {
+  this._ensureConnected();
+  
+  try {
+    const passportId = await this.getPassportId(address);
+    if (!passportId) return null;
+    
+    const platforms = await this.contracts.passly.getVerifiedPlatforms(passportId);
+    const proofHashes = {};
+    
+    for (const platform of platforms) {
+      try {
+        const [, , proofHash, active] = await this.contracts.passly.getVerification(
+          passportId, 
+          platform
+        );
+        
+        // Only include active verifications
+        if (active) {
+          proofHashes[platform] = proofHash;
+        }
+      } catch (error) {
+        // Skip platforms that fail to load
+        console.warn(`Failed to load proof hash for platform ${platform}:`, error.message);
+      }
+    }
+    
+    return Object.keys(proofHashes).length > 0 ? proofHashes : null;
+  } catch (error) {
+    return null;
+  }
+}
 }
 
 export default PasslySDK;
