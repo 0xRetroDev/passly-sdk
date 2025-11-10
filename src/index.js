@@ -43,16 +43,16 @@ class PasslySDK {
 
     // Use default provider if none provided
     if (!config.provider) {
-      config.provider = new ethers.providers.JsonRpcProvider('https://testnet.skalenodes.com/v1/aware-fake-trim-testnet');
+      config.provider = new ethers.providers.JsonRpcProvider('https://base.llamarpc.com');
     }
 
     // Default contract addresses
     const addresses = {
-      passly: config.contractAddress || '0x8EEFC0840Bc24e269A2F77B787E9b3e212c4F316',
-      platforms: config.platformsAddress || '0xd2FEEa5775c171D85648198AeB77377fD9AdFe98',
-      archives: config.archivesAddress || '0xbC57EA3ff9BDE13087b907Dc02e86f08C57574E7',
-      rewards: config.rewardsAddress || '0xEc34ad267a9AACE045Ef4644047BCFeB0f53b0C0',
-      leaderboard: config.leaderboardAddress || '0x7f9c4841346d0ef7970daF02aE3663f8AC5bE540'
+      passly: config.contractAddress || '0xDAA115033325DCEBf0D32bbdD84afd26A2C29923',
+      platforms: config.platformsAddress || '0x81b77ae447A5Fa45961c5032e3bC0Da452E6237F',
+      archives: config.archivesAddress || '0x348E8c982f7DEAF3719A1a734F6752DA3c03737D',
+      rewards: config.rewardsAddress || '0x09F2006bdaF0342d33fF2855F901933e98b9c00e',
+      leaderboard: config.leaderboardAddress || '0x23B22FB6929b0832819d477913AeBeccCC5a9E41'
     };
 
     // Contract ABIs
