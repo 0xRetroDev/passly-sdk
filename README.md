@@ -2,6 +2,8 @@
 
 Official JavaScript SDK for the Passly identity protocol - a social identity layer that helps verify user identities and works as an anti-sybil tool.
 
+[Visit the website](https://passly.xyz/)
+
 ## Installation
 
 ```bash
